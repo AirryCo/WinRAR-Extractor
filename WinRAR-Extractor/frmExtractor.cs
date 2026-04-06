@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 
 namespace WinRAR_Extractor
 {
@@ -78,8 +79,8 @@ namespace WinRAR_Extractor
                 white14Link = white14Link.NextMatch();
             }
 
-            string lastSCname_x86 = $"https://www.win-rar.com/fileadmin/winrar-versions/winrar/{freeUrl_x86}";
-            string lastModified_x86 = HttpWebHelper.GetHttpWebData(lastSCname_x86, 3000, null, true);
+            string lastSCname_x86 = $"https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x32-701sc.exe"; // 最后一个32位版本
+			string lastModified_x86 = "20240528"; // 最后一个32位版本更新日期
             //Console.WriteLine(lastModified_x86);
 
             string lastSCname_x64 = $"https://www.win-rar.com/fileadmin/winrar-versions/winrar/{freeUrl_x64}";
@@ -88,12 +89,13 @@ namespace WinRAR_Extractor
 
             this.labVersion.Text = $"最新版本：[{version}]，更新时间：[{lastModified_x86}]-[x86] / [{lastModified_x64}]-[x64] - [简体中文]";
 
-            string rrlb_x86 = $"https://www.win-rar.com/fileadmin/winrar-versions/sc/sc{lastModified_x86}/rrlb/{freeUrl_x86}";
-            string rrlb_x64 = $"https://www.win-rar.com/fileadmin/winrar-versions/sc/sc{lastModified_x64}/rrlb/{freeUrl_x64}";
-            string wrr_x86 = $"https://www.win-rar.com/fileadmin/winrar-versions/sc/sc{lastModified_x86}/wrr/{freeUrl_x86}";
-            string wrr_x64 = $"https://www.win-rar.com/fileadmin/winrar-versions/sc/sc{lastModified_x64}/wrr/{freeUrl_x64}";
+            string rrlb_x86 = $"https://www.win-rar.com/fileadmin/winrar-versions/sc/sc{lastModified_x86}/rrlb/winrar-x32-701sc.exe"; // 最后一个32位版本
+			string rrlb_x64 = $"https://www.rarlab.com/rar/{freeUrl_x64}"; // @todo 待更新获取实验室版本的方法
+			string wrr_x86 = $"https://www.win-rar.com/fileadmin/winrar-versions/sc/sc{lastModified_x86}/wrr/winrar-x32-701sc.exe";
+			string wrr_x64 = lastSCname_x64;
 
-            this.tbrrlbx86.Text = rrlb_x86;
+
+			this.tbrrlbx86.Text = rrlb_x86;
             this.tbrrlbx64.Text = rrlb_x64;
             this.tbwrrx86.Text = wrr_x86;
             this.tbwrrx64.Text = wrr_x64;
